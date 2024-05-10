@@ -1,2 +1,3 @@
-# maven-template
-a template repository containing a minimal maven build and the eitco default maven github actions
+# Bill of Materials Maven Plugin
+
+This maven plugin supports creating bill of materials (bom) of given maven projects. 
