@@ -11,7 +11,7 @@
 
     <groupId>de.eitco.cide</groupId>
     <artifactId>bom-maven-plugin</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <developers>
@@ -25,7 +25,7 @@
         <url>https://github.com/eitco/bom-maven-plugin.git</url>
         <connection>scm:git:https://github.com/eitco/bom-maven-plugin.git</connection>
         <developerConnection>scm:git:https://github.com/eitco/bom-maven-plugin.git</developerConnection>
-      <tag>4.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <dependencies>
