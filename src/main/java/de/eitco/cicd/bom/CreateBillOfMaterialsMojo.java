@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import de.eitco.cicd.bom.xml.BillOfMaterials;
 import de.eitco.cicd.bom.xml.Dependency;
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -22,11 +23,7 @@ import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Mojo(name = "create", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
@@ -79,10 +76,8 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
 
         Map<String, Dependency> dependencies = new LinkedHashMap<>();
 
-        billOfMaterials.getDependencyManagement().getDependencies().forEach(dependency -> {
-
-            dependencies.put(dependency.dependencyKey(), dependency);
-        });
+        billOfMaterials.getDependencyManagement().getDependencies().forEach(
+                dependency -> dependencies.put(dependency.dependencyKey(), dependency));
 
         try {
 
@@ -90,10 +85,8 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
 
                 final BillOfMaterials bom = mapper.readValue(file, BillOfMaterials.class);
 
-                bom.getDependencyManagement().getDependencies().forEach(dependency -> {
-
-                    dependencies.put(dependency.dependencyKey(), dependency);
-                });
+                bom.getDependencyManagement().getDependencies().forEach(
+                        dependency -> dependencies.put(dependency.dependencyKey(), dependency));
             }
 
             billOfMaterials.getDependencyManagement().setDependencies(new ArrayList<>(dependencies.values()));
@@ -101,6 +94,11 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
             FileUtils.forceMkdir(targetFile.getParentFile());
 
             mapper.writeValue(targetFile, billOfMaterials);
+
+            Artifact bomArtifact = makeBomArtifact();
+            bomArtifact.setFile(targetFile);
+
+            project.addAttachedArtifact(bomArtifact);
 
         } catch (IOException e) {
 
