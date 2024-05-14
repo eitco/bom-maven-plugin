@@ -96,7 +96,6 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
             mapper.writeValue(targetFile, billOfMaterials);
 
             Artifact bomArtifact = makeBomArtifact();
-            bomArtifact.setFile(targetFile);
 
             project.addAttachedArtifact(bomArtifact);
 

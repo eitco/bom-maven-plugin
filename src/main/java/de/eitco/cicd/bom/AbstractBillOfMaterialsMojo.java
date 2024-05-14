@@ -13,6 +13,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
@@ -35,8 +36,29 @@ public abstract class AbstractBillOfMaterialsMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project}", readonly = true)
     protected MavenProject project;
+    @Parameter(defaultValue = ".asc")
+    protected String signatureExtension;
 
     protected Artifact makeBomArtifact() {
-        return artifactFactory.createArtifactWithClassifier(groupId, artifactId, version, "pom", null);
+
+        Artifact result = artifactFactory.createArtifactWithClassifier(groupId, artifactId, version, "pom", null);
+
+        result.setFile(targetFile);
+
+        return result;
+    }
+
+    protected Artifact makeSignatureArtifact() {
+
+        Artifact result = artifactFactory.createArtifactWithClassifier(groupId, artifactId, version, "pom" + signatureExtension, null);
+
+        result.setFile(makeSignatureFile());
+
+        return result;
+    }
+
+    @NotNull
+    protected File makeSignatureFile() {
+        return new File(targetFile.getAbsolutePath() + signatureExtension);
     }
 }
