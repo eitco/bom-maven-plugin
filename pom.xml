@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.eitco</groupId>
         <artifactId>eitco-oss-parent</artifactId>
-        <version>0.0.3</version>
+        <version>0.0.5</version>
     </parent>
 
 
@@ -83,20 +83,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.0.0</version>
-                <executions>
-                    <execution>
-                        <id>add-thirdparty-licenses</id>
-                        <goals>
-                            <goal>add-third-party</goal>
-                        </goals>
-                        <configuration>
-                            <excludedGroups>
-                                de\.eitco\..*
-                            </excludedGroups>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
