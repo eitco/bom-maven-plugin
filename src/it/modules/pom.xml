@@ -88,15 +88,7 @@
                     <execution>
                         <goals>
                             <goal>create</goal>
-                            <goal>install</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                        <id>deploy</id>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                        <phase>install</phase>
                     </execution>
                 </executions>
             </plugin>

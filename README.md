@@ -8,6 +8,34 @@
 This goal scans the current project and creates a bill of materials (bom) pom containing the current project 
 and all of its (sub-) modules with the current version as dependency management.
 
+activate it in the following way:
+
+```xml
+<project>
+    ...
+    <build>
+        ...
+        <plugins>
+            ...
+            <plugin>
+                <groupId>de.eitco.cicd</groupId>
+                <artifactId>bom-maven-plugin</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+Check for the latest version [here](https://central.sonatype.com/artifact/de.eitco.cicd/bom-maven-plugin). This enables the following goals:
+
+
 It can be customized with the following parameters:
 
 ## additionalBoms
