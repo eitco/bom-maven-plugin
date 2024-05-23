@@ -1,5 +1,6 @@
 # Bill of Materials Maven Plugin
 
+[![License](https://img.shields.io/github/license/eitco/bom-maven-plugin.svg?style=for-the-badge)](https://opensource.org/license/mit)
 [![Build status](https://img.shields.io/github/actions/workflow/status/eitco/bom-maven-plugin/deploy.yaml?branch=main&style=for-the-badge&logo=github)](https://github.com/eitco/bom-maven-plugin/actions/workflows/deploy.yaml)
 [![Maven Central Version](https://img.shields.io/maven-central/v/de.eitco.cicd/bom-maven-plugin?style=for-the-badge&logo=apachemaven)](https://central.sonatype.com/artifact/de.eitco.cicd/bom-maven-plugin)
 
@@ -13,6 +14,9 @@ It can be customized with the following parameters:
 
 This parameter specifies a list of additional pom files whose dependency management 
 will be included in the generated bom.
+
+Consider using the [flatten-maven-plugin](https://github.com/mojohaus/flatten-maven-plugin) to generate a pom containing the projects dependency management and 
+specifying the generated file as `additionalBom`.
 
 ## typesByPackaging
 
