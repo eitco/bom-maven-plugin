@@ -1,19 +1,21 @@
 package de.eitco.cicd.bom;
 
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
 import java.io.File;
 import java.util.Optional;
 
+/**
+ * This goal attaches the signature of the bom file to the current project - provided it exists. It does not generate
+ * the signature, use the `maven-gpg-plugin` to do so.
+ */
 @Mojo(name = "attach-signature", defaultPhase = LifecyclePhase.VERIFY)
 public class AttachBomSignatureMojo extends AbstractBillOfMaterialsMojo {
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() {
 
         File signatureFile = makeSignatureFile();
 

@@ -14,7 +14,6 @@ import de.eitco.cicd.bom.xml.BillOfMaterials;
 import de.eitco.cicd.bom.xml.Dependency;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -25,6 +24,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * This goal scans the current project and creates a bill of materials (bom) pom containing the current project and
+ * all of its (sub-) modules with the current version as dependency management.
+ */
 @Mojo(name = "create", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
 
@@ -36,9 +39,18 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
         }
     };
 
+    /**
+     * This parameter specifies a list of additional pom files whose dependency management will be included in the
+     * generated bom.
+     */
     @Parameter
     private List<File> additionalBoms = new ArrayList<>();
 
+    /**
+     * This parameter holds a map of artifact types indexed by their packaging. The plugin needs this map to deduce
+     * the types of artifacts given their packaging. The default types (pom, jar, war) are always known. Use this
+     * parameter if you have some custom packaging to use in your bom.
+     */
     @Parameter
     private Map<String, String> typesByPackaging = new HashMap<>();
 
@@ -55,7 +67,7 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
     }
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException {
 
         BillOfMaterials billOfMaterials = new BillOfMaterials();
 
