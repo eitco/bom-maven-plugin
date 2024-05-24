@@ -41,16 +41,21 @@ public abstract class AbstractBillOfMaterialsMojo extends AbstractMojo {
 
     protected Artifact makeBomArtifact() {
 
-        Artifact result = artifactFactory.createArtifactWithClassifier(groupId, artifactId, version, "pom", null);
+        Artifact result = makeArtifact("pom");
 
         result.setFile(targetFile);
 
         return result;
     }
 
+    protected Artifact makeArtifact(String extension) {
+
+        return artifactFactory.createArtifactWithClassifier(groupId, artifactId, version, extension, null);
+    }
+
     protected Artifact makeSignatureArtifact() {
 
-        Artifact result = artifactFactory.createArtifactWithClassifier(groupId, artifactId, version, "pom" + signatureExtension, null);
+        Artifact result = makeArtifact("pom" + signatureExtension);
 
         result.setFile(makeSignatureFile());
 
