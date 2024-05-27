@@ -9,7 +9,11 @@ package de.eitco.cicd.bom.xml;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonRootName(value = "project", namespace = BillOfMaterials.MAVEN_XML_NAMESPACE)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -36,7 +40,28 @@ public class BillOfMaterials {
     private String packaging = "pom";
 
     @JacksonXmlProperty(namespace = MAVEN_XML_NAMESPACE)
+    private String description;
+
+    @JacksonXmlProperty(namespace = MAVEN_XML_NAMESPACE)
+    private String url;
+
+    @JacksonXmlProperty(namespace = MAVEN_XML_NAMESPACE)
+    private Organization organization;
+
+    @JacksonXmlElementWrapper(localName = "licenses", namespace = BillOfMaterials.MAVEN_XML_NAMESPACE)
+    @JacksonXmlProperty(localName = "license", namespace = BillOfMaterials.MAVEN_XML_NAMESPACE)
+    private List<License> licenses = new ArrayList<>();
+
+    @JacksonXmlElementWrapper(localName = "developers", namespace = BillOfMaterials.MAVEN_XML_NAMESPACE)
+    @JacksonXmlProperty(localName = "developer", namespace = BillOfMaterials.MAVEN_XML_NAMESPACE)
+    private List<Developer> developers = new ArrayList<>();
+
+    @JacksonXmlProperty(namespace = MAVEN_XML_NAMESPACE)
+    private Scm scm;
+
+    @JacksonXmlProperty(namespace = MAVEN_XML_NAMESPACE)
     private DependencyManagement dependencyManagement = new DependencyManagement();
+
 
     public String getModelVersion() {
         return modelVersion;
@@ -110,6 +135,60 @@ public class BillOfMaterials {
 
     public BillOfMaterials setPackaging(String packaging) {
         this.packaging = packaging;
+        return this;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public BillOfMaterials setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public BillOfMaterials setOrganization(Organization organization) {
+        this.organization = organization;
+        return this;
+    }
+
+    public List<License> getLicenses() {
+        return licenses;
+    }
+
+    public BillOfMaterials setLicenses(List<License> licenses) {
+        this.licenses = licenses;
+        return this;
+    }
+
+    public List<Developer> getDevelopers() {
+        return developers;
+    }
+
+    public BillOfMaterials setDevelopers(List<Developer> developers) {
+        this.developers = developers;
+        return this;
+    }
+
+    public Scm getScm() {
+        return scm;
+    }
+
+    public BillOfMaterials setScm(Scm scm) {
+        this.scm = scm;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BillOfMaterials setDescription(String description) {
+        this.description = description;
         return this;
     }
 }

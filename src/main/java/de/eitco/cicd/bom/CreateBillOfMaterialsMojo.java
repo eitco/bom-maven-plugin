@@ -10,8 +10,7 @@ package de.eitco.cicd.bom;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import de.eitco.cicd.bom.xml.BillOfMaterials;
-import de.eitco.cicd.bom.xml.Dependency;
+import de.eitco.cicd.bom.xml.*;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -75,7 +74,7 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
         billOfMaterials.setArtifactId(artifactId);
         billOfMaterials.setVersion(version);
 
-        addProject(billOfMaterials, project);
+        addRootProject(billOfMaterials, project);
 
         for (MavenProject collectedProject : project.getCollectedProjects()) {
 
@@ -116,6 +115,17 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
             throw new MojoExecutionException(e.getMessage(), e);
         }
 
+    }
+
+    private void addRootProject(BillOfMaterials billOfMaterials, MavenProject project) {
+
+        addProject(billOfMaterials, project);
+        billOfMaterials.setDescription(project.getDescription());
+        billOfMaterials.setUrl(project.getUrl());
+        billOfMaterials.setOrganization(Organization.fromMaven(project.getOrganization()));
+        billOfMaterials.setLicenses(project.getLicenses().stream().map(License::fromMaven).toList());
+        billOfMaterials.setDevelopers(project.getDevelopers().stream().map(Developer::fromMaven).toList());
+        billOfMaterials.setScm(Scm.fromMaven(project.getScm()));
     }
 
     private void addProject(BillOfMaterials billOfMaterials, MavenProject collectedProject) {
