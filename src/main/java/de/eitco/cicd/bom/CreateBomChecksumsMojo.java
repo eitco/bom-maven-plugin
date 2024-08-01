@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+/**
+ * This goal generates check sums for the bill-of-materials generated.
+ */
 @Mojo(name = "checksums", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class CreateBomChecksumsMojo extends AbstractBillOfMaterialsMojo {
 

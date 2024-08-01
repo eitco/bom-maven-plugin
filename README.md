@@ -44,10 +44,10 @@ This parameter specifies a list of additional pom files whose dependency managem
 will be included in the generated bom.
 
 Consider using the [flatten-maven-plugin](https://github.com/mojohaus/flatten-maven-plugin) to generate a pom containing the projects dependency management and 
-specifying the generated file as `additionalBom`.
+specifying the generated file as `additionalBom`. The [integration tests](./src/it) provide an [example for that](./src/it/modules).
 
 ## typesByPackaging
 
 This parameter holds a map of artifact types indexed by their packaging. The plugin needs this map to deduce
-the types of artifacts given their packaging. The default types (pom, jar, war) are always known. Use this 
+the types of artifacts given their packaging. The default types (`pom`, `jar`, `war`) are always known. Use this 
 parameter if you have some custom packaging to use in your bom.

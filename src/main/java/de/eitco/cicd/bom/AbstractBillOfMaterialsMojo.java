@@ -19,25 +19,42 @@ import java.io.File;
 
 public abstract class AbstractBillOfMaterialsMojo extends AbstractMojo {
 
+    /**
+     * The name of the bill-of-materials file to generate.
+     */
     @Parameter(defaultValue = "${project.build.directory}/bom.xml")
     protected File targetFile;
 
+    /**
+     * The groupId of the bill-of-materials artifact to generate.
+     */
     @Parameter(defaultValue = "${project.groupId}")
     protected String groupId;
 
+    /**
+     * The artifactId of the bill-of-materials artifact to generate.
+     */
     @Parameter(defaultValue = "${project.artifactId}-bom")
     protected String artifactId;
 
+    /**
+     * The version of the bill-of-materials artifact to generate.
+     */
     @Parameter(defaultValue = "${project.version}")
     protected String version;
+
+    /**
+     * The extension to add to the signature file generated.
+     */
+    @Parameter(defaultValue = ".asc")
+    protected String signatureExtension;
+
 
     @Component
     protected ArtifactFactory artifactFactory;
 
     @Parameter(defaultValue = "${project}", readonly = true)
     protected MavenProject project;
-    @Parameter(defaultValue = ".asc")
-    protected String signatureExtension;
 
     protected Artifact makeBomArtifact() {
 
