@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.eitco.cicd</groupId>
         <artifactId>eitco-oss-parent</artifactId>
-        <version>0.0.14</version>
+        <version>0.0.15</version>
     </parent>
 
 
@@ -66,6 +66,8 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.16.1</version>
+<!--            <version>${jackson.version}</version>-->
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
@@ -83,15 +85,51 @@
         <plugins>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>deploy site site:stage scm-publish:publish-scm</goals>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-invoker-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-publish-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-report-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <distributionManagement>
+        <site>
+            <id>github</id>
+            <url>scm:git:https://github.com/eitco/eitco.github.io.git</url>
+        </site>
+    </distributionManagement>
+
 
 </project>

@@ -1,7 +1,4 @@
-
-File deployDirectory = new File(basedir, "target/repository/de/eitco/bom/test/cicd-bom-test-bom")
-
-assert deployDirectory.isDirectory()
+import groovy.xml.XmlSlurper
 
 File createdFile = new File(basedir, "target/bom.xml");
 

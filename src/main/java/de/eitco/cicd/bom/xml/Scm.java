@@ -55,10 +55,10 @@ public class Scm {
 
         Scm result = new Scm();
 
-        result.connection = scm.getConnection();
-        result.developerConnection = scm.getDeveloperConnection();
-        result.tag = scm.getTag();
-        result.url = scm.getUrl();
+        result.connection = scm == null ? null : scm.getConnection();
+        result.developerConnection = scm == null ? null : scm.getDeveloperConnection();
+        result.tag = scm == null ? null : scm.getTag();
+        result.url = scm == null ? null : scm.getUrl();
 
         return result;
     }

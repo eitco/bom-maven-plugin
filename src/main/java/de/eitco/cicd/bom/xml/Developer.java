@@ -88,13 +88,13 @@ public class Developer {
 
         Developer result = new Developer();
 
-        result.name = developer.getName();
-        result.email = developer.getEmail();
-        result.url = developer.getUrl();
-        result.organization = developer.getOrganization();
-        result.organizationUrl = developer.getOrganizationUrl();
-        result.timezone = developer.getTimezone();
-        result.id = developer.getId();
+        result.name = developer == null ? null : developer.getName();
+        result.email = developer == null ? null : developer.getEmail();
+        result.url = developer == null ? null : developer.getUrl();
+        result.organization = developer == null ? null : developer.getOrganization();
+        result.organizationUrl = developer == null ? null : developer.getOrganizationUrl();
+        result.timezone = developer == null ? null : developer.getTimezone();
+        result.id = developer == null ? null : developer.getId();
 
         return result;
     }

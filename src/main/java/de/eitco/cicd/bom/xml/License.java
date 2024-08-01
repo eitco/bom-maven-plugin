@@ -55,10 +55,10 @@ public class License {
 
         License result = new License();
 
-        result.name = license.getName();
-        result.url = license.getUrl();
-        result.distribution = license.getDistribution();
-        result.comments = license.getComments();
+        result.name = license == null ? null : license.getName();
+        result.url = license == null ? null : license.getUrl();
+        result.distribution = license == null ? null : license.getDistribution();
+        result.comments = license == null ? null : license.getComments();
 
         return result;
     }

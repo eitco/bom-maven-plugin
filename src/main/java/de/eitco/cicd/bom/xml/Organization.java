@@ -34,8 +34,8 @@ public class Organization {
 
         Organization result = new Organization();
 
-        result.name = organization.getName();
-        result.url = organization.getUrl();
+        result.name = organization == null ? null : organization.getName();
+        result.url = organization == null ? null : organization.getUrl();
 
         return result;
     }
