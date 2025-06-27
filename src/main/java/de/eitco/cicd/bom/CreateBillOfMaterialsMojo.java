@@ -74,6 +74,15 @@ public class CreateBillOfMaterialsMojo extends AbstractBillOfMaterialsMojo {
         billOfMaterials.setArtifactId(artifactId);
         billOfMaterials.setVersion(version);
 
+        if (" bom".equals(name)) {
+
+            billOfMaterials.setName(artifactId);
+
+        } else {
+
+            billOfMaterials.setName(name);
+        }
+
         addRootProject(billOfMaterials, project);
 
         for (MavenProject collectedProject : project.getCollectedProjects()) {

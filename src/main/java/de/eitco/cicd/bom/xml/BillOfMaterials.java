@@ -35,6 +35,8 @@ public class BillOfMaterials {
     private String artifactId;
     @JacksonXmlProperty(namespace = MAVEN_XML_NAMESPACE)
     private String version;
+    @JacksonXmlProperty(namespace = MAVEN_XML_NAMESPACE)
+    private String name;
 
     @JacksonXmlProperty(namespace = MAVEN_XML_NAMESPACE)
     private String packaging = "pom";
@@ -96,6 +98,15 @@ public class BillOfMaterials {
 
     public BillOfMaterials setVersion(String version) {
         this.version = version;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BillOfMaterials setName(String name) {
+        this.name = name;
         return this;
     }
 

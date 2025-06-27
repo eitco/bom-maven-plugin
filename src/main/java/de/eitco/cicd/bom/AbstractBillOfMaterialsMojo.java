@@ -44,6 +44,12 @@ public abstract class AbstractBillOfMaterialsMojo extends AbstractMojo {
     protected String version;
 
     /**
+     * The name of the bill-of-materials artifact to generate.
+     */
+    @Parameter(defaultValue = "${project.name} bom")
+    protected String name;
+
+    /**
      * The extension to add to the signature file generated.
      */
     @Parameter(defaultValue = ".asc")
